@@ -4,28 +4,24 @@ const { Type } = require('../db');
 const getTypesApi = async()=>{
     try{
         const pokeTypes = await axios.get('https://pokeapi.co/api/v2/type')
-        const types =pokeTypes.data.result.map(t => t.name);
-        type.forEach((t)=>{
+        const types =pokeTypes.data.results.map(t => t.name);
+        types.forEach((t)=>{
             Type.findOrCreate({
                 where: {name: t}
             })
         })
+        console.log("getType")
         return types;
+        
     } catch (e){
         throw new Error('Error get Types')
     }
 };
 
-const getTypeDb = async() =>{
-    try{
-        const pokeTypesBd = await Type.findAll();
-        return pokeTypesBd
-    }catch(e){
-        throw new Error('Error get Types Db')
-    }
-};
+getTypesApi ();
+//dejo la fun invocada para q cuando levante el servidor ya me traiga los tipos
 
 module.exports ={
     getTypesApi,
-    getTypeDb
+    
 }

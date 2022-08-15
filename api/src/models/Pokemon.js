@@ -7,12 +7,10 @@ module.exports = (sequelize) => {
       name: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true,
-      },
+        },
       id: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
-        unique: true,
         allowNull: false,
         primaryKey: true,
       },
@@ -41,7 +39,7 @@ module.exports = (sequelize) => {
         allowNull: true,
       },
       img: {
-        type: DataTypes.TEXT,
+        type: DataTypes.STRING,
         allowNull: true,
       },
       createdInDb: {
