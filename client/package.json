@@ -7,6 +7,7 @@
     "@testing-library/react": "^11.2.6",
     "@testing-library/user-event": "^13.1.1",
     "axios": "^0.27.2",
+    "components": "^0.1.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.3",
@@ -15,6 +16,8 @@
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.3.0",
+    "style": "^0.0.3",
+    "styled-components": "^5.3.5",
     "thunk": "^0.0.1",
     "web-vitals": "^2.1.4"
   },

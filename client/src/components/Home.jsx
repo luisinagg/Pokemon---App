@@ -1,46 +1,65 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import { getPokemons } from '../redux/actions';
+import { getPokemons, getTypes } from '../redux/actions';
 import Cards from './Cards';
 import "./css/Home.css"
+import NavBar from './NavBar';
+import Orders from './Orders';
+import Paged from './Paged';
+import SearchBar from './SearchBar';
  
-export default function Home() {
+export default function Home(props) {
   const dispatch = useDispatch();
-  let allPokemons = useSelector((state)=> state.pokemons)
+  let pokemons = useSelector((state)=> state.pokemons)
   //me trigo el estado de redux de pokemons
-  
+  const [order, setOrder] = useState('')
   //paginado
-  //const [ currentPage, setCurrenPage ] = useState(1); //gardo la pag actual para q siempre inicie en 1
-  //const [ pokemonsByPage, setPokemonsByPage ]= useState(12) // seteo la Q de pokemons x pag
-  //const lastPokemonPage =currentPage * pokemonsByPage; //calculo el index del ultimo pokemon
-  //const firstPokemonPage = lastPokemonPage - pokemonsByPage //numero con el q vamos a ubicar en el array al primer personaje (0)
-  //const currentPokemons = allPokemons?.slice(firstPokemonPage, lastPokemonPage)//garre de allPokemons desde el primer pokemon hasta el ultimo calculado segun index
-
+  const [ currentPage, setCurrentPage ] = useState(1); //gardo la pag actual para q siempre inicie en 1
+  const [ pokemonsPerPage, setPokemonsPerPage ]= useState(12) // seteo la Q de pokemons x pag
+  const indexOfLastPoke =currentPage * pokemonsPerPage; //calculo el index del ultimo pokemon
+  const indexOfFirstPoke = indexOfLastPoke - pokemonsPerPage //numero con el q vamos a ubicar en el array al primer personaje (0)
+  const currentPokemons = pokemons.slice(indexOfFirstPoke, indexOfLastPoke)//garre de allPokemons desde el primer pokemon hasta el ultimo calculado segun index
+  
+  const paged = (pageNumber) => {
+    setCurrentPage(pageNumber);
+}
   useEffect(()=>{
     dispatch(getPokemons())
-    //dispatch(getTypes())
+    dispatch(getTypes())
   },[dispatch])
-  console.log(allPokemons)
+  
 
   return (
 
     <div>
-      <div>
-        <h1>HOME</h1>
-      </div>
+      <div><NavBar/></div>
+      <div><SearchBar/></div>
+      <div><Orders
+      setCurrenPage={setCurrentPage}
+      /></div>
       <div className='grid'>     
         {
-          allPokemons && allPokemons.map(poke =>{
+        
+          currentPokemons.map(poke =>{
             return(
               <Cards
-               key={poke.id}
-               name={poke.name} 
-               img={poke.img}
-               />
+              key={poke.id}
+              name={poke.name} 
+              img={poke.img}
+              type ={poke.type}
+              />
             )
-          })
+         })
         }
+              <div>
+                <Paged
+                pokemonsPerPage={pokemonsPerPage}
+                pokemons= {pokemons.length}
+                paged = {paged}
+                currentPage={currentPage}
+                />
+              </div>
     </div>  
 
     </div>
