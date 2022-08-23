@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom';
 import { getPokemons, getTypes } from '../redux/actions';
 import Cards from './Cards';
 import "./css/Home.css"
@@ -43,12 +44,14 @@ export default function Home(props) {
         
           currentPokemons.map(poke =>{
             return(
+              <Link to={`/detail/${poke.id}`}>
               <Cards
               key={poke.id}
               name={poke.name} 
               img={poke.img}
               type ={poke.type}
               />
+              </Link>
             )
          })
         }

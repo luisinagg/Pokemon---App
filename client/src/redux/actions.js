@@ -67,3 +67,14 @@ export function orderByExistent(input){
         payload: input
     }
 }
+
+export function getPokemonsId(id){
+    return async function(dispatch){
+        let pokeId = (await axios.get(`http://localhost:3001/pokemons/${id}`)).data;
+        console.log(pokeId)
+        return dispatch({
+            type: "GET_POKEMON_ID",
+            payload: pokeId
+        })
+    }
+}

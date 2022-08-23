@@ -1,7 +1,8 @@
 const inicialState ={
    pokemons:[],
    allPokemons:[],
-   types:[]
+   types:[],
+   detail:[]
 }
 
 function rootReducer( state = inicialState, action){
@@ -55,7 +56,6 @@ function rootReducer( state = inicialState, action){
             }): state.allPokemons
         }
     case "ORDER_ATTACK":
-        
         let att = [... state.allPokemons]
           return{
             ...state,
@@ -93,6 +93,12 @@ function rootReducer( state = inicialState, action){
             ...state,
             pokemons: action.payload === "created"? aux.filter(cur=> isNaN(cur.id)): action.payload === "existent" ? aux.filter(cur => !isNaN(cur.id)) : state.allPokemons
         }
+    case "GET_POKEMON_ID":
+        return{
+            ...state,
+            detail: action.payload
+        }
+
         default:
             return state
  }

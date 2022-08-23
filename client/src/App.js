@@ -11,7 +11,7 @@ function App() {
     <Routes>
       <Route index element= {<LandingPage/>}></Route>
       <Route path={'/home'} element={<Home/>}></Route>
-      <Route path={'/pokemons/:id'} element={<Details/>}></Route>
+      <Route path={'/detail/:id'} element={<Details/>}></Route>
       <Route path={'/pokemons'} element={<Create/>}></Route>
 
     </Routes>
