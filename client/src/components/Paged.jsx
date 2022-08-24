@@ -30,8 +30,8 @@ const LiSelected = styled.li`
     cursor: pointer;
     width: 20px;
     height: 30px;
-    color: blue;
-    border: 2px #f07b3f solid;
+    color: green;
+    border: 2px #38761d solid;
     border-top: none;
     border-left: none;
     border-right: none;

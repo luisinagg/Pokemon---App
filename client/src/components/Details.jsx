@@ -59,7 +59,7 @@ export default function Details() {
       </div>
       <div>
         <span>Type:</span>
-        { poke.type?.map(cur=><p>{cur}</p>)}
+        { poke.type?.map(cur=><p key={cur}>{cur}</p>)}
       </div>
       <Link to='/home'
       />

@@ -2,71 +2,19 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { createPokemon, getTypes } from '../redux/actions'
-import NavBar from './NavBar'
-
-function validate({name,hp,attack,defense,speed,weight,height,types}) {
-const errors = {};
-//validate name
-if(!name){
-  errors.name= <b>Enter name❌</b>
-}else if(!/^[a-zA-Z\s]*$/.test(name)){
-  errors.name = <b>"Characters not allowed❌</b>
-}
-//validate hp
-if (!hp || hp < 10 || hp > 100) {
-  if (!hp) errors.hp = <b>Enter hp❌</b>
-  else if (hp <= 10) errors.hp = <b>10 hp min</b>
-  else if (hp >= 100) errors.hp = <b>100 hp max</b>
-} 
-//validate attack
-if (!attack || attack < 10 || attack > 100) {
-  if (!attack) errors.attack = <b>Enter attack❌</b>
-  else if (attack <= 10) errors.attack = <b>try with 10 attack min</b>
-  else if (attack >= 100) errors.attack = <b>try with 100 attack max</b>
-}
-//validate defense
-if (!defense || defense < 10 || defense > 100) {
-  if (!defense) errors.defense = <b>Enter defense❌</b>
-  else if (defense <= 10) errors.defense = <b>try with 10 defense min</b>
-  else if (defense >= 100) errors.defense = <b>try with 100 defense max</b>
-}
-//validate speed
-if (!speed || speed < 10 || speed > 100) {
-  if (!speed) errors.speed = <b>Enter speed❌</b>
-  else if (speed <= 10) errors.speed = <b>try with 10 speed min</b>
-  else if (speed >= 100) errors.speed = <b>try with 100 speed max</b>
-}
-//validate height
-if (!height || height < 10 || height > 100) {
-  if (!height) errors.height = <b>Enter height❌</b>
-  else if (height <= 10) errors.height = <b>try with 10 height min</b>
-  else if (height >= 100) errors.height = <b>try with 100 height max</b>
-}
-//validate weight
- if (!weight || weight < 10 || weight > 100) {
-  if (!weight) errors.weight = <b>Enter weight❌</b>
-  else if (weight <= 10) errors.weight = <b>try with 10 weight min</b>
-  else if (weight >= 100) errors.weight = <b>try with 100 weight max</b>
-}
-//validate types
-if(!types.length){
-  errors.types = <b>Choose a pokemon type❌</b>
-} else if (types.length > 2){
-  <b>Can not choose more than two types</b>
-}
-
-return errors
-
-}
+import NavBar from './NavBar';
+import CardsTypes from './CardsTypes';
+import { useNavigate } from 'react-router-dom';
 
 export default function Create() {
   const dispatch= useDispatch()
   
+  const [active, setActive]= useState(true)
+  //creo este et para desactivar boton del form
   useEffect(() =>{
     dispatch(getTypes())
   },[])
   
-  const [errors, setErrors] =useState({})
   const [input, setInput] = useState({
     name: "",
     img: "",
@@ -78,8 +26,70 @@ export default function Create() {
     speed:"",
     types:[],
   })
-
-  const types = useSelector((state)=>state.types)
+  
+  function validate({name,hp,attack,defense,speed,weight,height,types}) {
+    const errors = {};
+    //validate name
+    if(!name){
+      errors.name= <b>Enter name❌</b>
+    }else if(!/^[a-zA-Z\s]*$/.test(name)){
+      errors.name = <b>"Characters not allowed❌</b>
+    }
+    //validate hp
+    if (!hp || hp < 10 || hp > 100) {
+      if (!hp) errors.hp = <b>Enter hp❌</b>
+      else if (hp <= 10) errors.hp = <b>10 hp min</b>
+      else if (hp >= 100) errors.hp = <b>100 hp max</b>
+    } 
+    //validate attack
+    if (!attack || attack < 10 || attack > 100) {
+      if (!attack) errors.attack = <b>Enter attack❌</b>
+      else if (attack <= 10) errors.attack = <b>try with 10 attack min</b>
+      else if (attack >= 100) errors.attack = <b>try with 100 attack max</b>
+    }
+    //validate defense
+    if (!defense || defense < 10 || defense > 100) {
+      if (!defense) errors.defense = <b>Enter defense❌</b>
+      else if (defense <= 10) errors.defense = <b>try with 10 defense min</b>
+      else if (defense >= 100) errors.defense = <b>try with 100 defense max</b>
+    }
+    //validate speed
+    if (!speed || speed < 10 || speed > 100) {
+      if (!speed) errors.speed = <b>Enter speed❌</b>
+      else if (speed <= 10) errors.speed = <b>try with 10 speed min</b>
+      else if (speed >= 100) errors.speed = <b>try with 100 speed max</b>
+    }
+    //validate height
+    if (!height || height < 10 || height > 100) {
+      if (!height) errors.height = <b>Enter height❌</b>
+      else if (height <= 10) errors.height = <b>try with 10 height min</b>
+      else if (height >= 100) errors.height = <b>try with 100 height max</b>
+    }
+    //validate weight
+    if (!weight || weight < 10 || weight > 100) {
+      if (!weight) errors.weight = <b>Enter weight❌</b>
+      else if (weight <= 10) errors.weight = <b>try with 10 weight min</b>
+      else if (weight >= 100) errors.weight = <b>try with 100 weight max</b>
+    }
+    //validate types
+    if(!types.length){
+      errors.types = <b>Choose a pokemon type❌</b>
+    } else if (types.length > 2){
+      <b>Can not choose more than two types</b>
+    }
+    if(!errors.name && !errors.attack && !errors.defense && !errors.types && !errors.hp && !errors.weight && !errors.height && !errors.speed && !errors.img){
+      setActive(false)
+    } else {
+      setActive(true)
+    }
+    
+    return errors
+    
+      
+    }
+    
+    const [errors, setErrors] =useState({})
+  const typesLoaded = useSelector((state)=>state.types)
 
   function handleInput(e){
     setInput({
@@ -92,23 +102,39 @@ export default function Create() {
     }))
   }
 
+    const navigate = useNavigate();
+
   function handleTypes(e){
-    e.preventDefault()
-    if (types.length === 2) {
-      alert('limit 2 types')
-    }else if (types.length < 2){
-    setInput({
+    if (input.types.length >= 2) {
+      alert('Limit 2 types')
+    }else {
+     setInput({
       ...input,
-      types: [...types, e.target.value]
+      types:[...input.types, e.target.value]
     })
+    setErrors(validate({
+      ...input,
+      types:[...input.types, e.target.value]
+    }))
   }
 }
 
   function handleSubmit(e){
     e.preventDefault();
    dispatch(createPokemon(input))
-   
-
+   setInput({
+    name: "",
+    img: "",
+    attack: "",
+    defense:"",
+    weight:"",
+    height:"",
+    hp:"",
+    speed:"",
+    types:[],
+   })
+   alert("New Pokemon created!");
+   navigate("/home")
   }
   
   return (
@@ -122,7 +148,7 @@ export default function Create() {
         <input type={"text"} placeholder={"Ex:Pepi"} name={"name"} value={input.name} 
         onChange ={e => handleInput(e)}
         />
-        {errors.name && (<p>{errors.name}</p>)}
+        {errors && (<p>{errors.name}</p>)}
         </div>
         <br/>
         <div>
@@ -130,7 +156,7 @@ export default function Create() {
         <input type={"number"} placeholder={"Ex:40"} name={"speed"} value={input.speed}
         onChange ={e => handleInput(e)}
         />
-        {errors.speed && (<p>{errors.speed}</p>)}
+        {errors && (<p>{errors.speed}</p>)}
         </div>
         <br/>
         <div>
@@ -138,7 +164,7 @@ export default function Create() {
         <input type={"number"} placeholder={"Ex:30"} name={"attack"} value={input.attack}
         onChange ={e => handleInput(e)}
         />
-        {errors.attack && (<p>{errors.attack}</p>)}
+        {errors && (<p>{errors.attack}</p>)}
         </div>
         <br/>
         <div>
@@ -146,7 +172,7 @@ export default function Create() {
         <input type={"number"} placeholder={"Ex:15"} name={"defense"} value={input.defense}
         onChange ={e => handleInput(e)}
         />
-        {errors.defense && (<p>{errors.defense}</p>)}
+        {errors && (<p>{errors.defense}</p>)}
         </div>
         <br/>
         <div>
@@ -154,7 +180,7 @@ export default function Create() {
         <input type={"number"} placeholder={"Ex:14"} name={"weight"} value={input.weight}
         onChange ={e => handleInput(e)}
         />
-        {errors.weight && (<p>{errors.weight}</p>)}
+        {errors && (<p>{errors.weight}</p>)}
         </div>
         <br/>
         <div>
@@ -162,7 +188,7 @@ export default function Create() {
         <input type={"number"} placeholder={"Ex:32"} name={"height"} value={input.height}
         onChange ={e => handleInput(e)}
         />
-        {errors.height && (<p>{errors.height}</p>)}
+        {errors && (<p>{errors.height}</p>)}
         </div>
         <br/>
         <div>
@@ -170,7 +196,7 @@ export default function Create() {
         <input type={"number"} placeholder={"Ex:20"} name={"hp"} value={input.hp}
        onChange ={e => handleInput(e)}
        />
-       {errors.hp && (<p>{errors.hp}</p>)}
+       {errors && (<p>{errors.hp}</p>)}
         </div>
         <br/>
         <div>
@@ -184,16 +210,22 @@ export default function Create() {
           <label>Types</label>
           <select onChange={e => handleTypes(e)}>
             {
-              types?.map( t =>{
+              typesLoaded?.map( t =>{
                 return(
-                <option key={t} value={types.indexOf(t)}>{t}</option>
+                <option key={t} value={typesLoaded.indexOf(t)}>{t}</option>
                 )
               })
             }
           </select>
+          <div>
+            {errors && (<p>{errors.types}</p>)}
+            { input.types && input.types.map((cur)=>{
+              return <CardsTypes key={cur} typesId={cur}  typesLoaded={typesLoaded} setInput={setInput} input={input}/>
+            })}
+          </div>
         </div>
         <br/>
-        <input type={"submit"} value={"Create Pokemon!"}
+        <input type={"submit"} value={"Create Pokemon!"} disabled={ active && "disabled"}
         />
       </form>
       
