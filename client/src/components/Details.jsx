@@ -26,7 +26,7 @@ export default function Details() {
         <h1>{poke.name}</h1>
       </div>
       <div>
-        <img src={poke.img} alt='image'/>
+        <img src={poke.img} alt='pokeimg'/>
       </div>
 
       <div>

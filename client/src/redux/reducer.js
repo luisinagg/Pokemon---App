@@ -56,7 +56,7 @@ function rootReducer( state = inicialState, action){
             }): state.allPokemons
         }
     case "ORDER_ATTACK":
-        let att = [... state.allPokemons]
+        let att = [...state.allPokemons]
           return{
             ...state,
             pokemons: action.payload === 'Asc'? att.sort((a,b)=>{

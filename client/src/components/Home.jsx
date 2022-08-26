@@ -9,12 +9,13 @@ import NavBar from './NavBar';
 import Orders from './Orders';
 import Paged from './Paged';
 import SearchBar from './SearchBar';
+
  
 export default function Home(props) {
   const dispatch = useDispatch();
   let pokemons = useSelector((state)=> state.pokemons)
   //me trigo el estado de redux de pokemons
-  const [order, setOrder] = useState('')
+  
   //paginado
   const [ currentPage, setCurrentPage ] = useState(1); //gardo la pag actual para q siempre inicie en 1
   const [ pokemonsPerPage, setPokemonsPerPage ]= useState(12) // seteo la Q de pokemons x pag
@@ -34,11 +35,13 @@ export default function Home(props) {
   return (
 
     <div>
+      
       <div><NavBar/></div>
       <div><SearchBar/></div>
       <div><Orders
       setCurrenPage={setCurrentPage}
-      /></div>
+      />
+      </div>
       <div className='grid'>     
         {
         

@@ -25,7 +25,7 @@ export default function Orders({setCurrenPage, setOrder}) {
     return(
         <div>
             <div>
-                <label>Order by name</label>
+                <label>Order by Attack</label>
                 <select onChange={e => handleAttack(e)}>
                     <option value="default">Default</option>
                     <option value="Asc">Ascendent</option>
@@ -43,7 +43,7 @@ export default function Orders({setCurrenPage, setOrder}) {
                 </select>
             </div>
             <div>
-                <label>Order by attack</label>
+                <label>Order by Name</label>
                 <select onChange={e => handleOrdeAz(e)}>
                     <option value="default">Default</option>
                     <option value="A-Z">A-Z</option>

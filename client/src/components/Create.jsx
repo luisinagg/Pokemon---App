@@ -13,7 +13,7 @@ export default function Create() {
   //creo este et para desactivar boton del form
   useEffect(() =>{
     dispatch(getTypes())
-  },[])
+  },[dispatch])
   
   const [input, setInput] = useState({
     name: "",

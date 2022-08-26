@@ -56,7 +56,7 @@ export default function Paged({pokemons,paged, pokemonsPerPage,currentPage}) {
                 pageNumber && pageNumber.map(n=> {
                 if( n === currentPage){
                     return(
-                        <LiSelected key= {paged+Math.random()*13256}>
+                        <LiSelected key={paged+Math.random()*13256}>
                             {/* aca arriba le puse paged para solucionar el error del key para la li child */}   
                             <a key={paged+Math.random()*13256} onClick={()=> paged(n)}>{n}</a>
                         </LiSelected>
