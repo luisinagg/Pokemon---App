@@ -1,0 +1,17 @@
+.input {
+    text-align: center;
+    color: #8707ff;
+    border: 3px solid #8707ff;
+    border-radius: 10px;
+    padding: 10px 25px;
+    background: transparent;
+    max-width: 250px;
+   }
+  
+   .divInput{
+    margin-top: 0vh;
+    padding: 5px 1150px;
+    justify-content: flex-end;
+    align-items: flex-end;
+
+   }

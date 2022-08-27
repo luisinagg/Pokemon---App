@@ -1,0 +1,18 @@
+.inputOr {
+  text-align: center;
+  color: #8707ff;
+  border: 3px solid #8707ff;
+  border-radius: 10px;
+  padding: 10px 25px;
+  background: transparent;
+  max-width: 250px;
+  display: flex;
+  flex-wrap: nowrap;
+  cursor: pointer;
+ }
+
+ .divInputOr{
+  display: flex;
+    align-items:flex-start;
+    justify-content: space-evenly;
+ }

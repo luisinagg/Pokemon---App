@@ -25,43 +25,42 @@ export default function Details() {
       </div>
       <div className={styles.imageD}>
         <div className={styles.detailsCard}>
-        <div className={styles.text}>
-        <h1>{poke.name}</h1>
-      </div>
       <div >
         <img className={styles.divImg} src={poke.img} alt='pokeimg'/>
       </div>
-      <div className={styles.text}>
-        <span>N:</span>
-        <span>{poke.id}</span>
+        <div className={styles.text}>
+        <h2>{poke.name}</h2>
       </div>
-      <div className={styles.text}>
-        <span>HP:</span>
+       <div className={styles.text}>
+        <span>Hp: </span>
         <span>{poke.hp}</span>
       </div>
       <div className={styles.text}>
-        <span>Speed:</span>
+        <span>Speed: </span>
         <span>{poke.speed}</span>
       </div>
       <div className={styles.text}>
-        <span>Defense:</span>
+        <span>Defense: </span>
         <span>{poke.defense}</span>
       </div>
       <div className={styles.text}>
-        <span>Attack:</span>
+        <span>Attack: </span>
         <span>{poke.attack}</span>
       </div>
       <div className={styles.text}>
-        <span>Height:</span>
+        <span>Height: </span>
         <span>{poke.height}</span>
       </div>
       <div className={styles.text}>
-        <span>Weight:</span>
+        <span>Weight: </span>
         <span>{poke.weight}</span>
       </div>
       <div className={styles.text}>
-        <span>Type:</span>
-        { poke.type?.map(cur=><p key={cur}>{cur}</p>)}
+        { poke.type?.map(cur=><p key={cur}>Types: {cur}</p>)}
+      </div>
+      <div className={styles.text}>
+        <span>Id: </span>
+        <span>{poke.id}</span>
       </div>
      
       </div>

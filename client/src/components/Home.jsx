@@ -47,7 +47,7 @@ export default function Home(props) {
         
           currentPokemons.map(poke =>{
             return(
-              <Link text-decoration={"none"} to={`/detail/${poke.id}`}>
+              <Link to={`/detail/${poke.id}`} text-decoration='none'>
               <Cards
               key={poke.id}
               name={poke.name} 

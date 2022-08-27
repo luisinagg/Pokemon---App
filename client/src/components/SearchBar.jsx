@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { submitSearch } from '../redux/actions';
 import { useDispatch } from 'react-redux';
+import styles from './css/searchBar.module.css'
 
 export default function SearchBar() {
     let [ search, setSearch] = useState("");
@@ -15,13 +16,9 @@ export default function SearchBar() {
         dispatch (submitSearch(search))
     }
   return (
-    <div>
-        <form onSubmit={e => handleSubmitSearch(e)}>
-            <label>Search:</label>
-            <input type="text" placeholder='Ex:charmander' onChange={e => handleSearch(e)} />
-            <input type="submit" value={"Send 🔍"}/>
-            
-
+    <div className={styles.divInput}>
+        <form  onSubmit={e => handleSubmitSearch(e)}>
+            <input className={styles.input} type="text" placeholder='Search...🔍' onChange={e => handleSearch(e)} />
         </form>
     </div>
   )
