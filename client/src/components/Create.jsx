@@ -5,6 +5,9 @@ import { createPokemon, getTypes } from '../redux/actions'
 import NavBar from './NavBar';
 import CardsTypes from './CardsTypes';
 import { useNavigate } from 'react-router-dom';
+import styles from './css/createForm.module.css'
+
+
 
 export default function Create() {
   const dispatch= useDispatch()
@@ -139,76 +142,61 @@ export default function Create() {
   
   return (
     
-    <div>
+    <div className= {styles.back}>
       <div><NavBar/></div>
+        
+        <div className={styles.formCard}>
       <form onSubmit={e=> handleSubmit(e)}>
-        <div>
-          <label>Name</label>
-          
-        <input type={"text"} placeholder={"Ex:Pepi"} name={"name"} value={input.name} 
-        onChange ={e => handleInput(e)}
+        <div>        
+        <input className={styles.input} type={"text"} placeholder={"Name"} name={"name"} value={input.name} 
+        onChange ={e => handleInput(e)} required= ""
         />
         {errors && (<p>{errors.name}</p>)}
         </div>
-        <br/>
         <div>
-          <label>Speed</label>
-        <input type={"number"} placeholder={"Ex:40"} name={"speed"} value={input.speed}
+        <input className={styles.input} type={"number"} placeholder={"Speed"} name={"speed"} value={input.speed}
         onChange ={e => handleInput(e)}
         />
         {errors && (<p>{errors.speed}</p>)}
         </div>
-        <br/>
-        <div>
-          <label>Attack</label>
-        <input type={"number"} placeholder={"Ex:30"} name={"attack"} value={input.attack}
+       <div>
+        <input className={styles.input} type={"number"} placeholder={"Attack"} name={"attack"} value={input.attack}
         onChange ={e => handleInput(e)}
         />
         {errors && (<p>{errors.attack}</p>)}
         </div>
-        <br/>
         <div>
-          <label>Defense</label>
-        <input type={"number"} placeholder={"Ex:15"} name={"defense"} value={input.defense}
+        <input className={styles.input} type={"number"} placeholder={"Defense"} name={"defense"} value={input.defense}
         onChange ={e => handleInput(e)}
         />
         {errors && (<p>{errors.defense}</p>)}
         </div>
-        <br/>
         <div>
-          <label>Weight</label>
-        <input type={"number"} placeholder={"Ex:14"} name={"weight"} value={input.weight}
+        <input className={styles.input} type={"number"} placeholder={"Weight"} name={"weight"} value={input.weight}
         onChange ={e => handleInput(e)}
         />
         {errors && (<p>{errors.weight}</p>)}
         </div>
-        <br/>
         <div>
-          <label>Height</label>
-        <input type={"number"} placeholder={"Ex:32"} name={"height"} value={input.height}
+        <input className={styles.input} type={"number"} placeholder={"Height"} name={"height"} value={input.height}
         onChange ={e => handleInput(e)}
         />
         {errors && (<p>{errors.height}</p>)}
         </div>
-        <br/>
         <div>
-          <label>Hp</label>
-        <input type={"number"} placeholder={"Ex:20"} name={"hp"} value={input.hp}
+        <input className={styles.input} type={"number"} placeholder={"Hp"} name={"hp"} value={input.hp}
        onChange ={e => handleInput(e)}
        />
        {errors && (<p>{errors.hp}</p>)}
         </div>
-        <br/>
         <div>
-          <label>Image</label>
-        <input type={"text"} placeholder={"Ex:http://myimage.png"} name={"img"} value={input.img}
+        <input className={styles.input} type={"text"} placeholder={"Image"} name={"img"} value={input.img}
         onChange ={e => handleInput(e)}
         />
         </div>
         <br/>
         <div>
-          <label>Types</label>
-          <select onChange={e => handleTypes(e)}>
+          <select  className={styles.input} defaultValue={"Types"} onChange={e => handleTypes(e)}>
             {
               typesLoaded?.map( t =>{
                 return(
@@ -217,18 +205,20 @@ export default function Create() {
               })
             }
           </select>
+          </div>
           <div>
             {errors && (<p>{errors.types}</p>)}
             { input.types && input.types.map((cur)=>{
               return <CardsTypes key={cur} typesId={cur}  typesLoaded={typesLoaded} setInput={setInput} input={input}/>
             })}
           </div>
-        </div>
-        <br/>
-        <input type={"submit"} value={"Create Pokemon!"} disabled={ active && "disabled"}
+        <input  type={"submit"} value={"Create Pokemon!"} disabled={ active && "disabled"}
         />
-      </form>
+        </form>
+      </div>
+      </div>
       
-    </div>
+    
   )
 }
+

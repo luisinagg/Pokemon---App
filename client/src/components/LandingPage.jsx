@@ -8,15 +8,15 @@ export default function LandingPage() {
   return (
     <body>
       <Contenedor>
-        <Img src={landing} alt="landing" />
+        <Img  src={landing} alt="landing" />
     <Divtitle>
         <h3>WELCOME TO POKE APP!</h3>
     </Divtitle>
-    <Button>
     <Link to = {'/home'} text-decoration='none'>
-       <h3>START</h3> 
-    </Link>
+    <Button>
+       <h3>GET STARTED!</h3> 
     </Button>
+    </Link>
     </Contenedor>
     </body>
   )
@@ -37,8 +37,9 @@ object-fit: cover;
 `;
 const Button= styled.div` 
 bottom:32em;
+color: white;
 left:16em;
-padding:1em 10em;
+padding:0.7em 8em;
 text-decoration: none;
  position: absolute;
  border: none;
@@ -76,8 +77,8 @@ text-decoration: none;
 `;
 const Divtitle= styled.div`
 display: flex;
-bottom:34em;
-left:20em;
+bottom:33em;
+left:19em;
 justify-content: flex-start;
 align-items: center;
 position: relative;

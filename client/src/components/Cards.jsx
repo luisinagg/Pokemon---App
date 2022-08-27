@@ -1,20 +1,26 @@
 import React from 'react'
-import "./css/Cards.css"
+import styles from './css/cards.module.css'
+
 
 
 export default function Cards({img,name,type}) {
   return (
 
-    <div className="card">
-    <div className="card-image"><img className='card-imgpoke' src={img} alt='pokeimg'/></div>
-    <div className="card-description">
-    <p className="text-title">{name}</p>
-    <p className="text-body">{name}</p>
-    <div>
-    <p>{type && type.join(", ")}</p>
+<div className={styles.card}>
+<div ><img className={styles.image} src={img}/></div>
+<div className="cardInfo">
+    <p className={styles.title}>{name}</p>
+    <p className={styles.types}>{type && type.join(", ")}</p>
+    <button className={styles.cardBut}>Read More</button>
     </div>
   </div>
-</div>
+
 
   )
 }
+
+  
+   
+    
+    
+ 

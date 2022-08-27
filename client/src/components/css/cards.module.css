@@ -1,0 +1,52 @@
+.card {
+    margin-top: 10vh;
+    margin-left: 10vh;
+    text-align: center;      
+    justify-content: center;
+    width: 250px;
+    height: 320px;
+    padding: 10px 20px;
+    color: #fff;
+    border-radius: 16px;
+    background: rgba(255,255, 255,0.2);
+    border: 1px solid rgba(255, 255,255,0.3);
+    box-shadow: 0 4px 30px rgba(0,0,0, 0.1);
+    font-size: 2vh;
+            
+   }
+
+.title{
+    text-decoration: none;
+    color: hsl(0, 0%, 100%);
+    font-size: 1.5rem;
+    font-weight: 500;
+    
+  
+}
+.types{
+    text-decoration: none;
+    letter-spacing: 2px;
+    font-size: 0.9rem;
+    margin: 5px 0 15px 0;
+}
+.image{
+    text-decoration: none;
+    width: 160px;
+    height: 160px;
+    position: relative;
+    top: 0;
+    left: 0;
+    
+
+}
+.cardBut {
+    padding: 0.6rem;
+    outline: none;
+    border: none;
+    border-radius: 4px;
+    background: #ffb8c2;
+    color: white;
+    font-weight: bold;
+    transition: 0.4s ease;
+   }
+   

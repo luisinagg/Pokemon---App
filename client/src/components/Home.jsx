@@ -4,11 +4,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom';
 import { getPokemons, getTypes } from '../redux/actions';
 import Cards from './Cards';
-import "./css/Home.css"
 import NavBar from './NavBar';
 import Orders from './Orders';
 import Paged from './Paged';
 import SearchBar from './SearchBar';
+import styles from './css/home.module.css'
 
  
 export default function Home(props) {
@@ -34,7 +34,7 @@ export default function Home(props) {
 
   return (
 
-    <div>
+    <div className={styles.home}>
       
       <div><NavBar/></div>
       <div><SearchBar/></div>
@@ -42,12 +42,12 @@ export default function Home(props) {
       setCurrenPage={setCurrentPage}
       />
       </div>
-      <div className='grid'>     
+      <div className={styles.grid}>     
         {
         
           currentPokemons.map(poke =>{
             return(
-              <Link to={`/detail/${poke.id}`}>
+              <Link text-decoration={"none"} to={`/detail/${poke.id}`}>
               <Cards
               key={poke.id}
               name={poke.name} 

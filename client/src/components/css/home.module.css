@@ -1,0 +1,14 @@
+.grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-column-gap: 22px;
+    grid-row-gap: 22px;
+    }
+
+.home{
+    background-color: hsl(62, 66%, 68%);
+    background-size: cover;
+    height: 100%;
+    
+}

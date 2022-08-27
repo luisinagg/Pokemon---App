@@ -1,0 +1,43 @@
+.detailsCard{
+    margin-left: 30vh;
+    text-align: center;
+    justify-content: center;
+    width: 350px;
+    height: 550px;
+    padding: 10px 20px;
+    color: #fff;
+    border-radius: 16px;
+    background: rgba(255,255, 255,0.2);
+    border: 1px solid rgba(255, 255,255,0.3);
+    box-shadow: 0 4px 30px rgba(0,0,0, 0.1);
+    
+   }
+.imageD{
+ background-image: url(../../media/detail.jpg);
+ background-size: cover;
+ height: 100vh;  
+ margin-top: 0%; 
+
+}
+.gral{
+    background-color: hwb(27 9% 5% / 0.788);
+}
+.text{
+    margin-left: 12vh;
+    position: relative;
+ flex-direction: row;
+ align-items: center;
+ font-size: 14px;
+ font-family: inherit;
+ justify-content: center;
+ justify-content: space-between;
+ color: rgb(147, 33, 33);
+ width: 9em;
+ height: 2.5em;
+}
+.divImg{
+    width: 15vh;
+    height: 15vh;
+    position: relative;
+    
+}

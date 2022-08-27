@@ -1,0 +1,82 @@
+.nav{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: transparent;
+    /* background: rgba(255,255, 255,0.2);
+    border: 1px solid rgba(255, 255,255,0.3);
+    box-shadow: 0 4px 30px rgba(0,0,0, 0.1); */
+}
+.li{
+    float: left;
+    display: inline;
+}
+.ul {
+    display: block;
+    text-align: center;
+    padding: 25px 20px;
+    text-decoration: none;
+}
+/* From uiverse.io by @kirzin */
+.button {
+ text-decoration: none;
+ position: relative;
+ flex-direction: column;
+ align-items: center;
+ border: none;
+ display: inline-block;
+ margin: 0 30px;
+ font-size: 14px;
+ font-family: inherit;
+ justify-content: space-between;
+ color: #fff;
+ width: 9em;
+ height: 2.5em;
+ line-height: 2em;
+ background: linear-gradient(90deg,#03a9f4,#f441a5,#ffeb3b,#03a9f4);
+ background-size: 300%;
+ border-radius: 30px;
+ z-index: 1;
+}
+
+
+button:hover {
+ animation: ani 8s linear infinite;
+ border: none;
+}
+
+@keyframes ani {
+ 0% {
+  background-position: 0%;
+ }
+
+ 100% {
+  background-position: 400%;
+ }
+}
+
+button:before {
+ content: '';
+ position: absolute;
+ top: -5px;
+ left: -5px;
+ right: -5px;
+ bottom: -5px;
+ z-index: -1;
+ background: linear-gradient(90deg,#03a9f4,#f441a5,#ffeb3b,#03a9f4);
+ background-size: 400%;
+ border-radius: 35px;
+ transition: 1s;
+}
+
+button:hover::before {
+ filter: blur(20px);
+}
+
+button:active {
+ background: linear-gradient(32deg,#03a9f4,#f441a5,#ffeb3b,#03a9f4);
+}
+
+
+    
