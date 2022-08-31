@@ -36,10 +36,10 @@
     position: relative;
     top: 0;
     left: 0;
-    
-
 }
+
 .cardBut {
+    cursor: pointer;
     padding: 0.6rem;
     outline: none;
     border: none;

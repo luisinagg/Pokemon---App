@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import {  orderAttack, orderAZ, orderByExistent, orderByTypes } from '../redux/actions'
+import {  filterAttack, orderAttack, orderAZ, orderByExistent, orderByTypes } from '../redux/actions'
 import styles from './css/orders.module.css'
 
 export default function Orders({setCurrenPage, setOrder}) {
@@ -23,6 +23,7 @@ export default function Orders({setCurrenPage, setOrder}) {
         dispatch(orderByExistent(e.target.value))
 
     }
+
     return(
         <div className={styles.divInputOr}>
             <div>
@@ -55,8 +56,7 @@ export default function Orders({setCurrenPage, setOrder}) {
                 <option value="existent">Existent</option>
             </select>
         </div>
-
-        </div>
+      </div>
     )
 
   

@@ -40,3 +40,22 @@
     position: relative;
     
 }
+.buttonDelete{
+    background-color: transparent;
+    position: relative;
+    width: 2.5rem;
+    left: 30rem;
+    top: 7rem;
+}
+ .buttonDelete button  {
+        cursor: pointer;
+        padding: 0.6rem;
+        outline: none;
+        border: none;
+        border-radius: 4px;
+        background: #ffb8c2;
+        color: white;
+        font-weight: bold;
+        transition: 0.4s ease;
+       }
+    

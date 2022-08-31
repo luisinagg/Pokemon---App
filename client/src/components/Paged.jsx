@@ -2,14 +2,17 @@ import React from 'react'
 import styled from 'styled-components';
 
 //Styled-components
-
+const Nav= styled.nav`
+position: relative;
+left: 39rem;
+`
 const Ul = styled.ul`
     list-style: none;
     display: flex;
     align-items: center;
     justify-content: center;
+    color: #7f037f;
 `;
-
 const Li = styled.li`
     display: flex;
     align-items: center;
@@ -20,7 +23,6 @@ const Li = styled.li`
     width: 30px;
     height: 30px;
 `;
-
 const LiSelected = styled.li`
     display: flex;
     align-items: center;
@@ -30,8 +32,8 @@ const LiSelected = styled.li`
     cursor: pointer;
     width: 20px;
     height: 30px;
-    color: green;
-    border: 2px #38761d solid;
+    color: violet;
+    border: 2px violet solid;
     border-top: none;
     border-left: none;
     border-right: none;
@@ -50,7 +52,7 @@ export default function Paged({pokemons,paged, pokemonsPerPage,currentPage}) {
     }
    
     return(
-        <nav>
+        <Nav>
             <Ul>
                 {
                 pageNumber && pageNumber.map(n=> {
@@ -72,6 +74,6 @@ export default function Paged({pokemons,paged, pokemonsPerPage,currentPage}) {
             })
           }
        </Ul>
-     </nav>
+     </Nav>
     )
 }

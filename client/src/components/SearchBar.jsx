@@ -3,7 +3,8 @@ import { submitSearch } from '../redux/actions';
 import { useDispatch } from 'react-redux';
 import styles from './css/searchBar.module.css'
 
-export default function SearchBar() {
+export default function SearchBar({setCurrentPage}) {
+    console.log(setCurrentPage)
     let [ search, setSearch] = useState("");
     const dispatch = useDispatch()
 
@@ -13,7 +14,8 @@ export default function SearchBar() {
 
     function handleSubmitSearch(e){
         e.preventDefault()
-        dispatch (submitSearch(search))
+        dispatch(submitSearch(search))
+        setCurrentPage(1)
     }
   return (
     <div className={styles.divInput}>

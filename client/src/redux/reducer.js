@@ -1,8 +1,13 @@
+
 const inicialState ={
    pokemons:[],
    allPokemons:[],
-   types:[],
-   detail:[]
+   type:[],
+   detail:[],
+   loading:true,
+   flagHome: false,
+   flagCreate:false,
+     
 }
 
 function rootReducer( state = inicialState, action){
@@ -11,7 +16,8 @@ function rootReducer( state = inicialState, action){
         return{
             ...state,
             pokemons: action.payload,
-            allPokemons: action.payload
+            allPokemons: action.payload,
+            loading:false
 
         }
     case "GET_TYPES":
@@ -88,7 +94,18 @@ function rootReducer( state = inicialState, action){
             pokemons: [...state.pokemons, action.payload]
         }
     case "ORDER_BY_EXISTENT":
-        let aux = [...state.allPokemons]
+        let aux = [...state.allPokemons] 
+        if(action.payload=== "created"){
+            let testing= aux.filter(cur => isNaN(cur.id))
+                if(!testing.length){
+                    alert('There is no Pokemons to show yet')
+                    return{
+                        ...state,
+                        pokemons: state.allPokemons
+                    }
+                }
+            }
+        
         return{
             ...state,
             pokemons: action.payload === "created"? aux.filter(cur=> isNaN(cur.id)): action.payload === "existent" ? aux.filter(cur => !isNaN(cur.id)) : state.allPokemons
@@ -98,7 +115,23 @@ function rootReducer( state = inicialState, action){
             ...state,
             detail: action.payload
         }
+    case "CLEAN_CACHE":
+        return{
+            ...state,
+            detail: action.payload
+        }
 
+    case "FLAG_HOME":
+        return{
+            ...state,
+            flagHome: action.payload
+        }
+    case "FLAG_CREATE":
+        return{
+            ...state,
+            flagCreate:action.payload
+        }
+        
         default:
             return state
  }

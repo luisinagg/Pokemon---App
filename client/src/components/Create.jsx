@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
-import { createPokemon, getTypes } from '../redux/actions'
+import { createPokemon, flagCreate, getPokemons, getTypes } from '../redux/actions'
 import NavBar from './NavBar';
 import CardsTypes from './CardsTypes';
 import { useNavigate } from 'react-router-dom';
@@ -16,6 +16,11 @@ export default function Create() {
   //creo este et para desactivar boton del form
   useEffect(() =>{
     dispatch(getTypes())
+    dispatch(getPokemons())
+    dispatch(flagCreate(true))
+    return function(){
+      dispatch(flagCreate(false))
+    }
   },[dispatch])
   
   const [input, setInput] = useState({
@@ -27,60 +32,66 @@ export default function Create() {
     height:"",
     hp:"",
     speed:"",
-    types:[],
+    type:[],
   })
   
-  function validate({name,hp,attack,defense,speed,weight,height,types}) {
+   const namePoke= useSelector((state)=>state.allPokemons)
+   console.log(namePoke)
+  function validate({name,hp,attack,defense,speed,weight,height,type}) {
     const errors = {};
     //validate name
+    let exist = namePoke.filter(cur => cur.name === name)
+    if(exist.length){
+      errors.name = <b>Name has already exist❌</b>
+    }
     if(!name){
       errors.name= <b>Enter name❌</b>
     }else if(!/^[a-zA-Z\s]*$/.test(name)){
-      errors.name = <b>"Characters not allowed❌</b>
+      errors.name = <b>Characters not allowed❌</b>
     }
     //validate hp
     if (!hp || hp < 10 || hp > 100) {
       if (!hp) errors.hp = <b>Enter hp❌</b>
-      else if (hp <= 10) errors.hp = <b>10 hp min</b>
-      else if (hp >= 100) errors.hp = <b>100 hp max</b>
+      else if (hp <= 10) errors.hp = <b>Try with 10 attack min</b>
+      else if (hp >= 100) errors.hp = <b>Try with 100 attack max</b>
     } 
     //validate attack
     if (!attack || attack < 10 || attack > 100) {
       if (!attack) errors.attack = <b>Enter attack❌</b>
-      else if (attack <= 10) errors.attack = <b>try with 10 attack min</b>
-      else if (attack >= 100) errors.attack = <b>try with 100 attack max</b>
+      else if (attack <= 10) errors.attack = <b>Try with 10 attack min</b>
+      else if (attack >= 100) errors.attack = <b>Try with 100 attack max</b>
     }
     //validate defense
     if (!defense || defense < 10 || defense > 100) {
       if (!defense) errors.defense = <b>Enter defense❌</b>
-      else if (defense <= 10) errors.defense = <b>try with 10 defense min</b>
-      else if (defense >= 100) errors.defense = <b>try with 100 defense max</b>
+      else if (defense <= 10) errors.defense = <b>Try with 10 defense min</b>
+      else if (defense >= 100) errors.defense = <b>Try with 100 defense max</b>
     }
     //validate speed
     if (!speed || speed < 10 || speed > 100) {
       if (!speed) errors.speed = <b>Enter speed❌</b>
-      else if (speed <= 10) errors.speed = <b>try with 10 speed min</b>
-      else if (speed >= 100) errors.speed = <b>try with 100 speed max</b>
+      else if (speed <= 10) errors.speed = <b>Try with 10 speed min</b>
+      else if (speed >= 100) errors.speed = <b>Try with 100 speed max</b>
     }
     //validate height
     if (!height || height < 10 || height > 100) {
       if (!height) errors.height = <b>Enter height❌</b>
-      else if (height <= 10) errors.height = <b>try with 10 height min</b>
-      else if (height >= 100) errors.height = <b>try with 100 height max</b>
+      else if (height <= 10) errors.height = <b>Try with 10 height min</b>
+      else if (height >= 100) errors.height = <b>Try with 100 height max</b>
     }
     //validate weight
     if (!weight || weight < 10 || weight > 100) {
       if (!weight) errors.weight = <b>Enter weight❌</b>
-      else if (weight <= 10) errors.weight = <b>try with 10 weight min</b>
-      else if (weight >= 100) errors.weight = <b>try with 100 weight max</b>
+      else if (weight <= 10) errors.weight = <b>Try with 10 weight min</b>
+      else if (weight >= 100) errors.weight = <b>Try with 100 weight max</b>
     }
     //validate types
-    if(!types.length){
-      errors.types = <b>Choose a pokemon type❌</b>
-    } else if (types.length > 2){
+    if(!type.length){
+      errors.type = <b>Choose a pokemon type❌</b>
+    } else if (type.length > 2){
       <b>Can not choose more than two types</b>
     }
-    if(!errors.name && !errors.attack && !errors.defense && !errors.types && !errors.hp && !errors.weight && !errors.height && !errors.speed && !errors.img){
+    if(!errors.name && !errors.attack && !errors.defense && !errors.type && !errors.hp && !errors.weight && !errors.height && !errors.speed && !errors.img){
       setActive(false)
     } else {
       setActive(true)
@@ -108,16 +119,16 @@ export default function Create() {
     const navigate = useNavigate();
 
   function handleTypes(e){
-    if (input.types.length >= 2) {
+    if (input.type.length >= 2) {
       alert('Limit 2 types')
     }else {
      setInput({
       ...input,
-      types:[...input.types, e.target.value]
+      type:[...input.type, e.target.value]
     })
     setErrors(validate({
       ...input,
-      types:[...input.types, e.target.value]
+      type:[...input.type, e.target.value]
     }))
   }
 }
@@ -134,9 +145,10 @@ export default function Create() {
     height:"",
     hp:"",
     speed:"",
-    types:[],
+    type:[],
    })
    alert("New Pokemon created!");
+   dispatch(getPokemons())
    navigate("/home")
   }
   
@@ -207,9 +219,9 @@ export default function Create() {
           </select>
           </div>
           <div>
-            {errors && (<p>{errors.types}</p>)}
-            { input.types && input.types.map((cur)=>{
-              return <CardsTypes key={cur} typesId={cur}  typesLoaded={typesLoaded} setInput={setInput} input={input}/>
+            {errors && (<p>{errors.type}</p>)}
+            { input.type && input.type.map((cur)=>{
+              return <CardsTypes key={cur} typesId={cur} typesLoaded={typesLoaded} setInput={setInput} input={input}/>
             })}
           </div>
         <input  type={"submit"} value={"Create Pokemon!"} disabled={ active && "disabled"}

@@ -7,7 +7,7 @@ export default function CardsTypes({typesId, typesLoaded, setInput, input}) {
     function handleDeletle(e){
         setInput({
             ...input,
-            types: input.types.filter(cur =>cur !== typesId )
+            type: input.type.filter(cur =>cur !== typesId )
         })
     }
       

@@ -1,30 +1,47 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useParams } from 'react-router-dom';
-import { getPokemonsId } from '../redux/actions';
+import {useNavigate, useParams } from 'react-router-dom';
+import { cleanCache, deletePokeBd, getPokemons, getPokemonsId } from '../redux/actions';
 import NavBar from './NavBar';
 import styles from './css/details.module.css'
+import Loading from './Loading';
 
 
 export default function Details() {
 
+  const navigate = useNavigate()
   const dispatch = useDispatch();
   const {id} = useParams();
 
   useEffect(()=>{
     dispatch(getPokemonsId(id))
+    return function(){
+      dispatch(cleanCache())
+    }
   },[dispatch,id])
+   
+  function handleDelete(e){
+    dispatch(deletePokeBd(poke.id))
+    dispatch(getPokemons())
+    navigate('/home')
+  }
 
   const poke = useSelector((state)=>state.detail)
-   console.log(poke)
-  return (
+   
+  let typesmap =(poke.type?.map(cur=>cur))?.join(", ")
+  
+  return !poke.img? <Loading/>:(
     
     <div className={styles.gral}>
       <div >
       <NavBar/>
       </div>
+      <div className={styles.buttonDelete}>
+        { isNaN(poke.id) && <button onClick={(e)=>handleDelete(e)}>❌</button> }
+      </div>
       <div className={styles.imageD}>
         <div className={styles.detailsCard}>
+        
       <div >
         <img className={styles.divImg} src={poke.img} alt='pokeimg'/>
       </div>
@@ -52,19 +69,22 @@ export default function Details() {
         <span>{poke.height}</span>
       </div>
       <div className={styles.text}>
-        <span>Weight: </span>
-        <span>{poke.weight}</span>
+        <span>Weight: {poke.weight}</span>
+        
       </div>
       <div className={styles.text}>
-        { poke.type?.map(cur=><p key={cur}>Types: {cur}</p>)}
+        {/* { poke.type?.map(cur=><p key={cur}>Types: {cur}</p>)} */}
+        <p>Type: {typesmap} </p>
       </div>
+      <br/>
+      
       <div className={styles.text}>
-        <span>Id: </span>
-        <span>{poke.id}</span>
+        <span>Id: {poke.id}</span>
       </div>
      
       </div>
       </div>
+      
     </div>
   )
 }
